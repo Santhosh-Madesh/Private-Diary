@@ -1,0 +1,23 @@
+{% extends 'diary/index.html' %}
+{% block title %}Login Page{% endblock title %}
+{% block nav %}{% endblock nav %}
+
+{% block content %}
+{% if messages %}
+  {% for message in messages %}
+  {{message}}<br>
+  {% endfor %}
+  <form action="{% url 'login' %}" method="post">
+    {% csrf_token %}
+    {{form}}
+    <input type="submit" value="Login">
+  </form>
+{% else %}
+  <form action="{% url 'login' %}" method="post">
+    {% csrf_token %}
+    {{form}}
+    <input type="submit" value="Login">
+  </form>
+{% endif %}
+    
+{% endblock content %}
