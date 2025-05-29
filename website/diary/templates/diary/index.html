@@ -6,7 +6,22 @@
     <title>{% block title %}Home Page{% endblock title %}</title>
 </head>
 <body>
+    <nav>
+        <a href="{% url 'index' %}">Home</a>
+        <a href="{% url 'create' %}">Write journal</a>
+    </nav>
     {% block content %}
+      {% if messages %}
+        {% for message in messages %}
+          <br>{{message}}<br>
+          <p>add the journal of the day? <a href="{% url 'create' %}">write a journal</a></p>
+        {% endfor %}
+      {% else %}
+        {% for data in context %}<br>
+          {{data.date}}<br>
+          {{data.content}}<br>
+        {% endfor %}
+      {% endif %}
     {% endblock content %}   
 </body>
 </html>
