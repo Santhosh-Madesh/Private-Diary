@@ -6,10 +6,13 @@
     <title>{% block title %}Home Page{% endblock title %}</title>
 </head>
 <body>
+    {% block nav %}
     <nav>
         <a href="{% url 'index' %}">Home</a>
         <a href="{% url 'create' %}">Write journal</a>
+        <a href="{% url 'signup' %}">SignUp</a>
     </nav>
+    {% endblock nav %}
     {% block content %}
       {% if messages %}
         {% for message in messages %}
