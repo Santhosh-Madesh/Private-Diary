@@ -1,3 +1,5 @@
 from django.db import models
 
-# Create your models here.
+class DiaryModel(models.Model):
+    date = models.DateField(unique=True)
+    content = models.CharField()
