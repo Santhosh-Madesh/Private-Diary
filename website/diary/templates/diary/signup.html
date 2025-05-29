@@ -1,0 +1,23 @@
+{% extends 'diary/index.html' %}
+{% block title %}Signup Page{% endblock title %}
+{% block nav %}{% endblock nav %}
+
+{% block content %}
+{% if messages %}
+  {% for message in messages %}
+  {{message}}<br>
+  {% endfor %}
+  <form action="{% url 'signup' %}" method="post">
+    {% csrf_token %}
+    {{form}}
+    <input type="submit" value="SignUp">
+  </form>
+{% else %}
+  <form action="{% url 'signup' %}" method="post">
+    {% csrf_token %}
+    {{form}}
+    <input type="submit" value="SignUp">
+  </form>
+{% endif %}
+    
+{% endblock content %}
