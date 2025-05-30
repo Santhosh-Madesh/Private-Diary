@@ -1,6 +1,7 @@
 {% extends 'diary/index.html' %}
 
 {% block content %}
+<br>
   <form action="{% url 'create' %}" method="post">
     {% csrf_token %}
     {{form}}
