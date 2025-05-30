@@ -45,9 +45,9 @@ def change_password(request):
         form = ChangePasswordForm(request.POST)
         if form.is_valid():
             username = form.cleaned_data["username"]
-            old_password = form.cleaned_data["password"]
+            old_password = form.cleaned_data["current_password"]
             new_password = form.cleaned_data["new_password"]
-            confirm_password = form.changed_data["confirm_new_password"]
+            confirm_password = form.cleaned_data["confirm_new_password"]
             user = request.user
             if user.is_authenticated:
                 current_username = user.username
@@ -65,8 +65,11 @@ def change_password(request):
                         else:
                             messages.error(request,"new password and confirm password do not match") 
                             return redirect("change_password")
+                else:
+                    messages.error(request,"Invalid Username")
+                    return redirect("change_password")
             else:
                 messages.error(request,"Please log in to your account")
                 return redirect("login")
     form = ChangePasswordForm()
-    return render(request,"",{"form":form})
+    return render(request,"diary/change_password.html",{"form":form})
