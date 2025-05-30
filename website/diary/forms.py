@@ -13,3 +13,9 @@ class SignupForm(forms.Form):
 class LoginForm(forms.Form):
     username = forms.CharField(max_length=150)
     password = forms.CharField(widget=forms.PasswordInput())
+
+class ChangePasswordForm(forms.Form):
+    username = forms.CharField(max_length=150)
+    current_password = forms.CharField(widget=forms.PasswordInput())
+    new_password = forms.CharField(widget=forms.PasswordInput())
+    confirm_new_password = forms.CharField(widget=forms.PasswordInput())
