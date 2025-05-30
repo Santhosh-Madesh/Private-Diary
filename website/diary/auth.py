@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import SignupForm, LoginForm
+from .forms import SignupForm, LoginForm, ChangePasswordForm
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
@@ -39,3 +39,34 @@ def login_page(request):
                 return redirect("index")
     form = LoginForm()
     return render(request,"diary/login.html",{"form":form})
+
+def change_password(request):
+    if request.method == "POST":
+        form = ChangePasswordForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data["username"]
+            old_password = form.cleaned_data["password"]
+            new_password = form.cleaned_data["new_password"]
+            confirm_password = form.changed_data["confirm_new_password"]
+            user = request.user
+            if user.is_authenticated:
+                current_username = user.username
+                if username == current_username:
+                    correct_user = authenticate(request,username=username,password=old_password)
+                    if correct_user is None:
+                        messages.error(request,"Invalid password, please enter a valid password")
+                        return redirect("change_password")
+                    else:
+                        if new_password==confirm_password:
+                            user = User.objects.get(username=username)
+                            user.set_password(new_password)
+                            user.save()
+                            return redirect("login")
+                        else:
+                            messages.error(request,"new password and confirm password do not match") 
+                            return redirect("change_password")
+            else:
+                messages.error(request,"Please log in to your account")
+                return redirect("login")
+    form = ChangePasswordForm()
+    return render(request,"",{"form":form})
