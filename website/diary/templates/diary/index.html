@@ -18,8 +18,13 @@
     {% block content %}
       {% if messages %}
         {% for message in messages %}
+          {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
           <br>{{message}}<br>
-          <p>add the journal of the day? <a href="{% url 'create' %}">write a journal</a></p>
+          {% for data in context %}<br>
+            {{data.date}}<br>
+            {{data.content}}<br>
+          {% endfor %}
+          {% endif %}
         {% endfor %}
       {% else %}
         {% for data in context %}<br>
