@@ -37,6 +37,7 @@ def login_page(request):
                 return redirect("login")
             else:
                 login(request,user)
+                messages.success(request,"Successfully Logged In!")
                 return redirect("index")
     form = LoginForm()
     return render(request,"diary/login.html",{"form":form})
@@ -79,4 +80,5 @@ def change_password(request):
 
 def logout_page(request):
     logout(request)
+    messages.success(request,"Logged out Successfully!")
     return redirect("login")
