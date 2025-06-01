@@ -19,3 +19,8 @@ class ChangePasswordForm(forms.Form):
     current_password = forms.CharField(widget=forms.PasswordInput())
     new_password = forms.CharField(widget=forms.PasswordInput())
     confirm_new_password = forms.CharField(widget=forms.PasswordInput())
+
+class DashboardForm(forms.Form):
+    age = forms.IntegerField()
+    instagram_id = forms.CharField()
+    bio = forms.CharField(widget=forms.Textarea())
