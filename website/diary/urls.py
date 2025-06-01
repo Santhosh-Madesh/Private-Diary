@@ -10,4 +10,5 @@ urlpatterns=[
     path("change_password/",auth.change_password,name="change_password"),
     path("logout/",auth.logout_page,name="logout"),
     path("dashboard/",views.personal_dashboard,name="dashboard"),
+    path("update_dashboard/",views.update_dashboard,name="update_dashboard"),
 ]
