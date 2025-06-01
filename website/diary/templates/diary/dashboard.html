@@ -2,6 +2,11 @@
 {% block title %}Dashboard{% endblock %}
 
 {% block content %}<br>
+  {% if messages %}
+    {% for message in messages %}
+      {{message}}!<br>
+    {% endfor %}
+  {% endif %}
   {% for item in user %}
     {{item.username}}<br>
   {% endfor %}
@@ -14,5 +19,5 @@
   {% for item in profile %}
     {{item.bio}}<br>
   {% endfor %}
-  <a href="">Update Dashboard</a><br>
+  <a href="{% url 'update_dashboard' %}">Update Dashboard</a><br>
 {% endblock content %}
