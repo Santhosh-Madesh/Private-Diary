@@ -24,3 +24,9 @@ class DashboardForm(forms.Form):
     age = forms.IntegerField()
     instagram_id = forms.CharField()
     bio = forms.CharField(widget=forms.Textarea())
+
+class DashboardUpdateForm(forms.Form):
+    username = forms.CharField()
+    email = forms.EmailField()
+    age = forms.IntegerField()
+    bio = forms.CharField(widget=forms.Textarea())
