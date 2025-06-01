@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .forms import DiaryForm, DashboardForm
+from .forms import DiaryForm, DashboardForm, DashboardUpdateForm
 from .models import DiaryModel, Profile
 from django.contrib.auth.models import User
+from django.http import HttpResponse
 
 @login_required
 def index(request):
@@ -58,3 +59,35 @@ def personal_dashboard(request):
     else:
         messages.error(request,"Please log in to access personal dashboard")
         return redirect("login")
+
+@login_required
+def update_dashboard(request):
+    if request.method == "POST":
+        form = DashboardUpdateForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data["username"]
+            email = form.cleaned_data["email"]
+            age = form.cleaned_data["age"]
+            bio = form.cleaned_data["bio"]
+
+            profile = Profile.objects.get(user=request.user)
+            profile.age = age
+            profile.bio = bio
+            profile.save()
+
+            user = User.objects.get(username = request.user.username)
+            user.email = email
+            user.username = username
+            user.save()
+
+            messages.success(request,"Dashboard Successfully Updated!")
+            return redirect("dashboard")
+
+    profile = Profile.objects.get(user=request.user)
+    username = profile.user.username
+    email = profile.user.email
+    age = profile.age
+    bio = profile.bio
+
+    form = DashboardUpdateForm(initial={'username':username,'email':email,'age':age,'bio':bio})
+    return render(request,"diary/dashboard_update.html",{"form":form})
