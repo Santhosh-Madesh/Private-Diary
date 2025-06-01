@@ -1,0 +1,12 @@
+{% extends 'diary/index.html' %}
+
+{% block title %}Dashboard Form{% endblock title %}
+
+{% block content %}
+  <p>You don't have the informations filled for the personal dashboard yet.</p>
+  <form action="{% url 'dashboard' %}" method="post">
+    {% csrf_token %}
+    {{form}}
+    <input type="submit" value="Update">
+  </form>
+{% endblock content %}

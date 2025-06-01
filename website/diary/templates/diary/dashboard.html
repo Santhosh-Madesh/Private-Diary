@@ -1,0 +1,18 @@
+{% extends 'diary/index.html' %}
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}<br>
+  {% for item in user %}
+    {{item.username}}<br>
+  {% endfor %}
+  {% for item in profile %}
+    Age: {{item.age}}<br>
+  {% endfor %}
+  {% for item in user %}
+    {{item.email}}<br>
+  {% endfor %}
+  {% for item in profile %}
+    {{item.bio}}<br>
+  {% endfor %}
+  <a href="">Update Dashboard</a><br>
+{% endblock content %}
