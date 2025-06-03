@@ -4,7 +4,7 @@
 
 {% block content %}
   <p>You don't have the informations filled for the personal dashboard yet.</p>
-  <form action="{% url 'dashboard' %}" method="post">
+  <form action="{% url 'dashboard' %}" enctype="multipart/form-data" method="post">
     {% csrf_token %}
     {{form}}
     <input type="submit" value="Update">
