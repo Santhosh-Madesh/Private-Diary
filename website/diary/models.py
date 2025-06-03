@@ -5,7 +5,10 @@ class DiaryModel(models.Model):
     date = models.DateField(unique=True)
     content = models.CharField()
 
+
+
 class Profile(models.Model):
+    pfp = models.ImageField(default="static/diary/images/default.jpg",blank=True,null=True,)
     user = models.OneToOneField(
         User,
         on_delete=models.CASCADE,
