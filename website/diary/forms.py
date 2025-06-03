@@ -1,5 +1,7 @@
 from django import forms
 from datetime import date
+from django.forms import ModelForm
+from .models import Profile
 
 class DiaryForm(forms.Form):
     date = forms.DateField(initial=date.today())
@@ -30,3 +32,9 @@ class DashboardUpdateForm(forms.Form):
     email = forms.EmailField()
     age = forms.IntegerField()
     bio = forms.CharField(widget=forms.Textarea())
+
+class ProfileModelForm(ModelForm):
+    class Meta:
+        model = Profile
+        fields = ["pfp","age","instagram_id","bio"]
+        
